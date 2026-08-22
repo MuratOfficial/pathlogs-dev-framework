@@ -1,0 +1,58 @@
+/**
+ * Базовый слой: то, что относится ко всему документу, а не к отдельному
+ * компоненту. Подключается отдельно от tokens.css — приложению со своими
+ * base-стилями достаточно одних токенов.
+ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+/* Печать (отчёты, экспорт): белый лист вместо тёмной темы */
+@media print {
+  body {
+    background: #fff;
+    color: #0f172a;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 45%, transparent);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+
+/* Иконка календаря в date-полях на тёмном фоне не читается */
+:root:not([data-theme="light"]) input[type="date"]::-webkit-calendar-picker-indicator,
+:root:not([data-theme="light"]) input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+}
+
+/* Placeholder визуально отличается от введённого текста — читается как
+   подсказка, а не как значение поля. */
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  font-style: italic;
+  opacity: 1;
+}
+
+/* Скрытая полоса прокрутки: ряды вкладок и ленты, где полоса — шум. */
+.pl-no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.pl-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

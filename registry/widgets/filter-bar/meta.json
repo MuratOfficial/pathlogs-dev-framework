@@ -1,0 +1,14 @@
+{
+  "name": "filter-bar",
+  "title": "Filter bar",
+  "description": "Панель фильтров, собираемая из описания полей, с сохранёнными пресетами. Одно и то же состояние обслуживает список, доску и адресную строку.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": ["@pathlogs/core"],
+  "tailwind": true,
+  "files": [
+    { "path": "FilterBar.tsx", "target": "filter-bar/FilterBar.tsx" },
+    { "path": "filterModel.ts", "target": "filter-bar/filterModel.ts" }
+  ]
+}

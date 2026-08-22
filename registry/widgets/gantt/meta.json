@@ -1,0 +1,14 @@
+{
+  "name": "gantt",
+  "title": "Gantt chart",
+  "description": "Диаграмма Ганта: полосы двигаются и растягиваются за края, зависимости рисуются стрелками, критический путь подсвечивается.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": ["@pathlogs/hooks"],
+  "tailwind": true,
+  "files": [
+    { "path": "Gantt.tsx", "target": "gantt/Gantt.tsx" },
+    { "path": "ganttLayout.ts", "target": "gantt/ganttLayout.ts" }
+  ]
+}

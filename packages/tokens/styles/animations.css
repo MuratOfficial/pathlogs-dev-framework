@@ -1,0 +1,118 @@
+/**
+ * Анимации фреймворка. Только transform и opacity — их браузер считает
+ * на композиторе, поэтому они не вызывают layout. Все выключаются при
+ * prefers-reduced-motion (см. конец файла).
+ */
+
+@keyframes pl-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pl-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pl-pop-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pl-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+@keyframes pl-aurora-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.18); }
+}
+@keyframes pl-gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes pl-float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes pl-spin {
+  to { transform: rotate(360deg); }
+}
+
+.pl-animate-fade-up { animation: pl-fade-up 0.55s var(--ease-out-expo) both; }
+.pl-animate-fade-in { animation: pl-fade-in var(--duration-slow) ease both; }
+.pl-animate-pop-in  { animation: pl-pop-in 0.22s var(--ease-out-expo) both; }
+.pl-animate-shake   { animation: pl-shake var(--duration-slow) cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+.pl-animate-float   { animation: pl-float-soft 5s ease-in-out infinite; }
+.pl-animate-spin    { animation: pl-spin 0.8s linear infinite; }
+
+/* Ступенчатое появление групп элементов: карточки списка, пункты меню. */
+.pl-delay-1 { animation-delay: 0.06s; }
+.pl-delay-2 { animation-delay: 0.12s; }
+.pl-delay-3 { animation-delay: 0.18s; }
+.pl-delay-4 { animation-delay: 0.24s; }
+.pl-delay-5 { animation-delay: 0.30s; }
+.pl-delay-6 { animation-delay: 0.36s; }
+
+/* Подъём карточки при наведении */
+.pl-hover-lift {
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease,
+    border-color var(--duration) ease;
+  will-change: transform;
+}
+.pl-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px -16px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Анимированный градиентный текст (заголовки лендингов, логотипы) */
+.pl-gradient-text {
+  background: linear-gradient(110deg, var(--accent-3), var(--accent-hover), var(--accent-2), var(--accent-pink));
+  background-size: 280% 280%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: pl-gradient-pan 8s ease infinite;
+}
+
+/* Градиентная кнопка: заливка «переезжает» под курсором, а не мигает. */
+.pl-btn-gradient {
+  background: linear-gradient(110deg, var(--accent), var(--accent-2) 55%, var(--accent-pink));
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  color: var(--accent-foreground);
+  transition: background-position 0.5s ease, transform var(--duration-fast) ease,
+    box-shadow 0.25s ease, opacity var(--duration) ease;
+  box-shadow: var(--shadow-accent);
+}
+.pl-btn-gradient:hover:not(:disabled) {
+  background-position: 100% 50%;
+  box-shadow: 0 12px 30px -8px color-mix(in srgb, var(--accent-2) 70%, transparent);
+}
+.pl-btn-gradient:active:not(:disabled) { transform: scale(0.98); }
+
+/* Фон экранов входа: размытые пятна, медленно дрейфующие друг относительно друга */
+.pl-aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--background);
+}
+.pl-aurora-blob {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: pl-aurora-drift 16s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .pl-aurora-blob { animation: none !important; }
+}

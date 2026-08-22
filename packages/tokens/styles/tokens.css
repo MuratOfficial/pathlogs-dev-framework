@@ -1,0 +1,117 @@
+/**
+ * PathLogs design tokens.
+ *
+ * Плоский набор CSS-переменных. Тёмная тема — значение по умолчанию на
+ * :root, светлая включается атрибутом [data-theme="light"] на <html>.
+ * Переопределять токены можно в любом месте каскада: компоненты читают
+ * только var(), собственных цветов у них нет.
+ */
+
+:root {
+  /* ── Поверхности ── */
+  --background: #0b0f1a;
+  --surface: #111827;
+  --surface-2: #1a2235;
+  --border: #243049;
+
+  /* ── Текст ── */
+  --foreground: #e5e9f2;
+  --muted: #8a94ab;
+
+  /* ── Акценты ── */
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-2: #a855f7;
+  --accent-3: #22d3ee;
+  --accent-pink: #ec4899;
+  --accent-foreground: #ffffff;
+
+  /* ── Семантика состояний ── */
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-foreground: #ffffff;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #0ea5e9;
+
+  /* ── Радиусы ── */
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
+
+  /* ── Тени ── */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.25);
+  --shadow: 0 4px 12px -4px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 12px 32px -12px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 24px 60px -24px rgb(0 0 0 / 0.65);
+  --shadow-accent: 0 8px 24px -10px color-mix(in srgb, var(--accent-2) 60%, transparent);
+
+  /* ── Слои (z-index) ──
+     Общая шкала: компоненты фреймворка не выдумывают свои числа,
+     иначе портал одного перекрывает портал другого случайным образом. */
+  --z-sticky: 20;
+  --z-header: 30;
+  --z-drawer: 40;
+  --z-dropdown: 50;
+  --z-modal: 60;
+  --z-toast: 80;
+  --z-tooltip: 90;
+
+  /* ── Движение ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.12s;
+  --duration: 0.2s;
+  --duration-slow: 0.4s;
+}
+
+[data-theme="light"] {
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef1f7;
+  --border: #dde3ee;
+
+  --foreground: #1b2233;
+  --muted: #5c6478;
+
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-2: #9333ea;
+  --accent-3: #0891b2;
+  --accent-pink: #db2777;
+
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --success: #16a34a;
+  --warning: #d97706;
+  --info: #0284c7;
+
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.06);
+  --shadow: 0 4px 12px -4px rgb(15 23 42 / 0.12);
+  --shadow-lg: 0 12px 32px -12px rgb(15 23 42 / 0.18);
+  --shadow-2xl: 0 24px 60px -24px rgb(15 23 42 / 0.25);
+}
+
+/* Приложение может попросить тему у системы: [data-theme="system"] отдаёт
+   решение медиазапросу. Атрибут ставит скрипт из @pathlogs/tokens/theme. */
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] {
+    --background: #f5f7fb;
+    --surface: #ffffff;
+    --surface-2: #eef1f7;
+    --border: #dde3ee;
+    --foreground: #1b2233;
+    --muted: #5c6478;
+    --accent-hover: #4f46e5;
+    --accent-2: #9333ea;
+    --accent-3: #0891b2;
+    --accent-pink: #db2777;
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+    --success: #16a34a;
+    --warning: #d97706;
+    --info: #0284c7;
+  }
+}

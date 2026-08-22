@@ -1,0 +1,15 @@
+{
+  "name": "kanban",
+  "title": "Kanban board",
+  "description": "Доска с перетаскиванием карточек и колонок, WIP-лимитами, скрытыми колонками и оптимистичным состоянием. Домен задаётся через renderCard и колбэки.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": ["@pathlogs/core", "@pathlogs/hooks"],
+  "tailwind": true,
+  "files": [
+    { "path": "Kanban.tsx", "target": "kanban/Kanban.tsx" },
+    { "path": "ColumnEditor.tsx", "target": "kanban/ColumnEditor.tsx" },
+    { "path": "kanbanOrder.ts", "target": "kanban/kanbanOrder.ts" }
+  ]
+}

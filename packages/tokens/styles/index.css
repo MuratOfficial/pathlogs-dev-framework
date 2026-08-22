@@ -1,0 +1,5 @@
+/* Полный слой стилей фреймворка: токены + база + анимации + ленты. */
+@import "./tokens.css";
+@import "./base.css";
+@import "./animations.css";
+@import "./scroll.css";

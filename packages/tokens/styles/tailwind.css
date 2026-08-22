@@ -1,0 +1,33 @@
+/**
+ * Мост к Tailwind v4: превращает токены в утилиты (bg-surface, text-muted,
+ * border-edge, …). Подключается ПОСЛЕ `@import "tailwindcss"`.
+ *
+ *   @import "tailwindcss";
+ *   @import "@pathlogs/tokens/styles/index.css";
+ *   @import "@pathlogs/tokens/styles/tailwind.css";
+ *
+ * `inline` означает «подставить var(), а не значение» — поэтому смена темы
+ * на [data-theme] каскадирует в утилиты без пересборки.
+ *
+ * border-edge, а не border-border: имя утилиты читается как «граница»,
+ * а не как заикание.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-edge: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+}
