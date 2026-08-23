@@ -4,10 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "deps": "tsc -b ../../packages/core",
     "pages": "node scripts/gen-pages.mjs",
+    "predev": "tsc -b ../../packages/core",
     "dev": "node scripts/gen-pages.mjs && next dev",
+    "prebuild": "tsc -b ../../packages/core",
     "build": "node scripts/gen-pages.mjs && next build",
     "start": "next start",
+    "pretypecheck": "tsc -b ../../packages/core",
     "typecheck": "node scripts/gen-pages.mjs && tsc --noEmit"
   },
   "dependencies": {
