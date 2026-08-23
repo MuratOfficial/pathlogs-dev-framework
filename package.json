@@ -4,18 +4,21 @@
   "private": true,
   "description": "Monorepo for the PathLogs UI framework: npm packages + a shadcn-style widget registry.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "build": "tsc -b packages/tokens packages/hooks packages/core packages/cli",
     "clean": "tsc -b --clean packages/tokens packages/hooks packages/core packages/cli",
-    "typecheck": "npm run build && tsc -p registry/tsconfig.json",
+    "typecheck": "npm run build && tsc -p registry/tsconfig.json && npm run typecheck -w @toimetdev/pathlogs-docs",
     "test": "vitest run",
     "test:watch": "vitest",
     "cli": "node packages/cli/dist/index.js",
     "check": "npm run typecheck && npm run test",
     "release:dry": "npm publish --dry-run -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
-    "release": "npm run check && npm publish -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui"
+    "release": "npm run check && npm publish -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
+    "docs": "npm run dev -w @toimetdev/pathlogs-docs",
+    "docs:build": "npm run build -w @toimetdev/pathlogs-docs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

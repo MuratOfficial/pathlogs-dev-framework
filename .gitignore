@@ -5,3 +5,4 @@ dist/
 .next/
 coverage/
 packages/cli/registry/
+apps/docs/.next/

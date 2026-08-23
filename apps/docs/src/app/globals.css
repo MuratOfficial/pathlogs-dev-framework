@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Сайт документации построен на самом фреймворке: те же токены, те же
+   компоненты. Это не только витрина — если что-то в пакетах сломается,
+   первым это увидит сайт. */
+@import "@toimetdev/pathlogs-tokens/styles/index.css";
+@import "@toimetdev/pathlogs-core/styles/components.css";
+@import "@toimetdev/pathlogs-tokens/styles/tailwind.css";
+
+/* Виджеты реестра размечены классами Tailwind, а лежат вне этого приложения.
+   Без @source их классы не попали бы в сборку, и живые примеры приехали бы
+   без стилей. */
+@source "../../../../registry/widgets";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── Типографика документации ──
+   Отдельный слой, а не @tailwindcss/typography: правил немного, зато они
+   опираются на те же токены, что и компоненты, и не тянут плагин. */
+
+.docs-prose {
+  color: color-mix(in srgb, var(--foreground) 88%, transparent);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+.docs-prose > * + * {
+  margin-top: 1rem;
+}
+.docs-prose h2 {
+  margin-top: 2.75rem;
+  scroll-margin-top: 6rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+}
+.docs-prose h3 {
+  margin-top: 2rem;
+  scroll-margin-top: 6rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.docs-prose a:not(.docs-plain) {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.docs-prose a:not(.docs-plain):hover {
+  text-decoration-color: var(--accent);
+}
+.docs-prose strong {
+  font-weight: 650;
+  color: var(--foreground);
+}
+.docs-prose ul,
+.docs-prose ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.35rem;
+}
+.docs-prose ul { list-style: disc; }
+.docs-prose ol { list-style: decimal; }
+.docs-prose li::marker {
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+
+/* Код внутри текста: отличается фоном, но не сбивает базовую линию строки. */
+.docs-prose :not(pre) > code {
+  padding: 0.1rem 0.3rem;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--accent-hover);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* ── Сетка страницы документации ── */
+
+/* Навигация слева фиксированной ширины, всё остальное тянется. Оглавление
+   живёт внутри правой части — так его ширина не влияет на сетку, когда
+   его нет. */
+.docs-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
+  .docs-shell {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+
+/* Оглавление появляется только там, где под него есть место: на среднем
+   экране третья колонка съела бы ширину строки текста. */
+.docs-toc {
+  display: none;
+  width: 13rem;
+  flex-shrink: 0;
+}
+@media (min-width: 1440px) {
+  .docs-toc { display: block; }
+}
+
+/* ── Сетка «шахматной доски» под превью ──
+   Показывает прозрачность компонента и границы его собственного фона —
+   на сплошной заливке этого не видно. */
+.docs-canvas {
+  background-image:
+    linear-gradient(45deg, color-mix(in srgb, var(--muted) 8%, transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in srgb, var(--muted) 8%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--muted) 8%, transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--muted) 8%, transparent) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* Свечение под заголовком лендинга. Декоративное и не перехватывает клики. */
+.docs-glow {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 32rem;
+  pointer-events: none;
+  background: radial-gradient(
+    50% 50% at 50% 40%,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 70%
+  );
+  filter: blur(40px);
+}
