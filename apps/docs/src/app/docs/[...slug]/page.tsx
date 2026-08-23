@@ -25,9 +25,29 @@ export async function generateMetadata({
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const item = findItem(slug.join("/"));
+  const path = slug.join("/");
+  const item = findItem(path);
   if (!item) return {};
-  return { title: item.title, description: item.description };
+
+  // Канонический адрес и карточка для соцсетей у каждой страницы свои:
+  // без них поисковик считает все разделы одной страницей, а ссылка
+  // в мессенджере разворачивается описанием главной
+  return {
+    title: item.title,
+    description: item.description,
+    alternates: { canonical: `/docs/${path}` },
+    openGraph: {
+      type: "article",
+      url: `/docs/${path}`,
+      title: `${item.title} — PathLogs UI`,
+      description: item.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${item.title} — PathLogs UI`,
+      description: item.description,
+    },
+  };
 }
 
 export default async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {

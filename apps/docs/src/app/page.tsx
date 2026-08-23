@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CodeBlock } from "@/components/docs";
+import { Logo } from "@/components/Logo";
 import { KanbanDemo } from "@/demos/widgets";
 
 const FEATURES = [
@@ -166,7 +167,8 @@ npx @toimetdev/pathlogs-ui add kanban gantt`}
 
       <footer className="border-t border-edge">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm text-muted lg:px-8">
-          <p>
+          <p className="flex items-center gap-2">
+            <Logo withText={false} />
             MIT · сделано на основе{" "}
             <a
               href="https://github.com/MuratOfficial/pathlogs"

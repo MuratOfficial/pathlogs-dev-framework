@@ -109,6 +109,101 @@
   .docs-toc { display: block; }
 }
 
+/* ───────────────────────── Блоки кода ─────────────────────────
+   Shiki собран с defaultColor: false — он не пишет цвет напрямую, а кладёт
+   оба варианта в --shiki-light и --shiki-dark. Какой применить, решают
+   правила ниже: подсветка следует за темой сайта, а не за системной
+   настройкой браузера. */
+
+.docs-code .shiki,
+.docs-code .shiki span {
+  color: var(--shiki-dark);
+}
+[data-theme="light"] .docs-code .shiki,
+[data-theme="light"] .docs-code .shiki span {
+  color: var(--shiki-light);
+}
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] .docs-code .shiki,
+  [data-theme="system"] .docs-code .shiki span {
+    color: var(--shiki-light);
+  }
+}
+
+/* Фон берём свой, а не из темы Shiki: у github-dark он серо-зелёный
+   и на нашей тёмно-синей поверхности выглядит заплаткой. */
+.docs-code {
+  position: relative;
+  overflow-x: auto;
+  background: transparent;
+}
+.docs-code .shiki {
+  margin: 0;
+  padding: 1rem 0;
+  background: transparent !important;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+/* Строки — строки грида: так гутер с номерами держит одну ширину,
+   а подсветка строки тянется во всю ширину блока. */
+.docs-code .shiki code {
+  display: grid;
+  min-width: max-content;
+  counter-reset: docs-line;
+}
+.docs-code .shiki .line {
+  padding-inline: 1.25rem;
+}
+
+.docs-code--numbered .shiki .line {
+  padding-left: 0;
+}
+.docs-code--numbered .shiki .line::before {
+  counter-increment: docs-line;
+  content: counter(docs-line);
+  display: inline-block;
+  width: 2.75rem;
+  margin-right: 1rem;
+  padding-right: 0.75rem;
+  text-align: right;
+  color: color-mix(in srgb, var(--muted) 55%, transparent);
+  /* Номера не должны попадать в выделение: иначе скопированный код
+     приезжает с цифрами в начале каждой строки. */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Пустая последняя строка Shiki оставляет как есть — не нумеруем её,
+   иначе у каждого блока появляется лишний номер в конце. */
+.docs-code .shiki .line:last-child:empty::before {
+  content: "";
+  counter-increment: none;
+}
+
+/* Кнопка копирования: проявляется при наведении на блок, но остаётся
+   доступной с клавиатуры и на тач-устройствах, где наведения нет. */
+.docs-code__copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--duration) ease;
+}
+.docs-code__copy--titled {
+  top: 2.75rem;
+}
+.group\/code:hover .docs-code__copy,
+.docs-code__copy:focus-visible {
+  opacity: 1;
+}
+@media (hover: none) {
+  .docs-code__copy { opacity: 1; }
+}
+
 /* ── Сетка «шахматной доски» под превью ──
    Показывает прозрачность компонента и границы его собственного фона —
    на сплошной заливке этого не видно. */

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CommandPalette, ThemeToggle, TooltipLayer, type CommandItem } from "@toimetdev/pathlogs-core";
 import { ALL_ITEMS, NAV } from "@/content/nav";
+import { Logo } from "./Logo";
 import { Sidebar } from "./Sidebar";
 
 /**
@@ -65,11 +66,8 @@ export function SiteChrome() {
             </svg>
           </button>
 
-          <Link href="/" className="docs-plain flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-accent via-accent-2 to-accent-pink text-sm font-bold text-white">
-              P
-            </span>
-            <span className="text-sm font-bold tracking-tight">PathLogs UI</span>
+          <Link href="/" aria-label="PathLogs UI — на главную" className="docs-plain">
+            <Logo />
           </Link>
 
           <nav className="ml-4 hidden items-center gap-1 text-sm md:flex">
