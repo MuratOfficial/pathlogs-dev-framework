@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useTransition, type ReactNode } from "react";
-import { useDragScroll } from "@pathlogs/hooks";
+import { useDragScroll } from "@toimetdev/pathlogs-hooks";
 import {
   applyDrag,
   buildScale,

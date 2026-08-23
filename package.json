@@ -13,7 +13,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "cli": "node packages/cli/dist/index.js",
-    "check": "npm run typecheck && npm run test"
+    "check": "npm run typecheck && npm run test",
+    "release:dry": "npm publish --dry-run -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
+    "release": "npm run check && npm publish -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
@@ -28,5 +30,11 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "author": "Murat Toimet <toimetm@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuratOfficial/pathlogs-dev-framework.git"
   }
 }

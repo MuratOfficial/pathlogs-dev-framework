@@ -95,7 +95,7 @@
 }
 
 /* Приложение может попросить тему у системы: [data-theme="system"] отдаёт
-   решение медиазапросу. Атрибут ставит скрипт из @pathlogs/tokens/theme. */
+   решение медиазапросу. Атрибут ставит скрипт из @toimetdev/pathlogs-tokens/theme. */
 @media (prefers-color-scheme: light) {
   [data-theme="system"] {
     --background: #f5f7fb;

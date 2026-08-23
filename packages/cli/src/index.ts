@@ -5,7 +5,8 @@
  * Виджеты копируются в код проекта, а не подключаются пакетом: доска
  * и диаграмма почти всегда требуют правок под конкретный домен, и держать
  * такое за стеной версионирования — значит вынуждать обходить его пропсами.
- * Примитивы и хуки, наоборот, ставятся из npm (@pathlogs/core, /hooks).
+ * Примитивы и хуки, наоборот, ставятся из npm: @toimetdev/pathlogs-core
+ * и @toimetdev/pathlogs-hooks.
  */
 
 import { add, bold, cyan, dim, init, list } from "./commands.js";
@@ -30,9 +31,9 @@ ${bold("Флаги")}
   -h, --help         эта справка
 
 ${bold("Примеры")}
-  npx pathlogs-ui init
-  npx pathlogs-ui add kanban gantt
-  npx pathlogs-ui add filter-bar --dry-run
+  npx @toimetdev/pathlogs-ui init
+  npx @toimetdev/pathlogs-ui add kanban gantt
+  npx @toimetdev/pathlogs-ui add filter-bar --dry-run
 `;
 
 interface Parsed {

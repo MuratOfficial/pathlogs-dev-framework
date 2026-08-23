@@ -5,7 +5,7 @@
   "type": "widget",
   "dependencies": [],
   "registryDependencies": [],
-  "packageDependencies": ["@pathlogs/core"],
+  "packageDependencies": ["@toimetdev/pathlogs-core"],
   "tailwind": true,
   "files": [
     { "path": "FilterBar.tsx", "target": "filter-bar/FilterBar.tsx" },

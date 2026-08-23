@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-import { useDismiss } from "@pathlogs/hooks";
+import { useDismiss } from "@toimetdev/pathlogs-hooks";
 import { cn } from "./cn.js";
 
 export interface MenuProps {

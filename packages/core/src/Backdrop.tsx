@@ -1,4 +1,4 @@
-import { backdropCss, type SurfaceBackdrop } from "@pathlogs/tokens";
+import { backdropCss, type SurfaceBackdrop } from "@toimetdev/pathlogs-tokens";
 import { cn } from "./cn.js";
 
 export interface BackdropProps {

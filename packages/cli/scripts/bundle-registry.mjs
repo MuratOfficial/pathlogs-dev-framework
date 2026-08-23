@@ -1,7 +1,7 @@
 /**
  * Кладёт реестр внутрь пакета CLI перед публикацией.
  *
- * Пакет должен везти виджеты с собой: `npx pathlogs-ui add` не должен
+ * Пакет должен везти виджеты с собой: `npx @toimetdev/pathlogs-ui add` не должен
  * ходить в сеть второй раз, а версия виджетов обязана совпадать с версией
  * CLI, которую поставил пользователь. В монорепо реестр лежит выше,
  * и без копирования он не попал бы в tarball.
@@ -21,5 +21,10 @@ if (!existsSync(source)) {
 }
 
 await rm(target, { recursive: true, force: true });
-await cp(source, target, { recursive: true });
+// tsconfig реестра нужен только в монорепо — для типизации виджетов на месте.
+// В пакете он бесполезен и лишь путает того, кто заглянет внутрь.
+await cp(source, target, {
+  recursive: true,
+  filter: (path) => !path.endsWith("tsconfig.json"),
+});
 console.log(`Реестр скопирован в ${target}`);

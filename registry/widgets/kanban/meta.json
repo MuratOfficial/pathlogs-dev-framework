@@ -5,7 +5,7 @@
   "type": "widget",
   "dependencies": [],
   "registryDependencies": [],
-  "packageDependencies": ["@pathlogs/core", "@pathlogs/hooks"],
+  "packageDependencies": ["@toimetdev/pathlogs-core", "@toimetdev/pathlogs-hooks"],
   "tailwind": true,
   "files": [
     { "path": "Kanban.tsx", "target": "kanban/Kanban.tsx" },

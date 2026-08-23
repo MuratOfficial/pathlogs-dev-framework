@@ -1,4 +1,4 @@
-import type { StreamStatus } from "@pathlogs/hooks";
+import type { StreamStatus } from "@toimetdev/pathlogs-hooks";
 import { cn } from "./cn.js";
 
 export interface LiveIndicatorProps {

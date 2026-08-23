@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useActiveSection, useDragScroll } from "@pathlogs/hooks";
+import { useActiveSection, useDragScroll } from "@toimetdev/pathlogs-hooks";
 import { cn } from "./cn.js";
 
 export interface NavSection {

@@ -5,7 +5,7 @@ import {
   createHotkeyMatcher,
   parseHotkey,
   type KeyChord,
-} from "@pathlogs/hooks";
+} from "@toimetdev/pathlogs-hooks";
 
 function chord(key: string, mods: Partial<KeyChord> = {}): KeyChord {
   return { key, mod: false, shift: false, alt: false, ...mods };

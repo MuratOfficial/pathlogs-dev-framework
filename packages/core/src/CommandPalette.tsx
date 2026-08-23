@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useHotkeys } from "@pathlogs/hooks";
+import { useHotkeys } from "@toimetdev/pathlogs-hooks";
 import { Dialog } from "./Dialog.js";
 import { cn } from "./cn.js";
 

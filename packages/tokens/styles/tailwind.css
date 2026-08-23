@@ -3,8 +3,8 @@
  * border-edge, …). Подключается ПОСЛЕ `@import "tailwindcss"`.
  *
  *   @import "tailwindcss";
- *   @import "@pathlogs/tokens/styles/index.css";
- *   @import "@pathlogs/tokens/styles/tailwind.css";
+ *   @import "@toimetdev/pathlogs-tokens/styles/index.css";
+ *   @import "@toimetdev/pathlogs-tokens/styles/tailwind.css";
  *
  * `inline` означает «подставить var(), а не значение» — поэтому смена темы
  * на [data-theme] каскадирует в утилиты без пересборки.

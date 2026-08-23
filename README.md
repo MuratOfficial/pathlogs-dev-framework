@@ -14,10 +14,10 @@ UI-фреймворк, выросший из трекера задач [pathlogs
 ```
 pathlogs-dev-framework/
 ├── packages/
-│   ├── tokens/     @pathlogs/tokens  — CSS-переменные, темы, работа с цветом
-│   ├── hooks/      @pathlogs/hooks   — протяжка, горячие клавиши, SSE, опрос
-│   ├── core/       @pathlogs/core    — диалоги, меню, тултипы, палитра, Markdown
-│   └── cli/        pathlogs-ui       — установка виджетов в проект
+│   ├── tokens/     @toimetdev/pathlogs-tokens  — CSS-переменные, темы, работа с цветом
+│   ├── hooks/      @toimetdev/pathlogs-hooks   — протяжка, горячие клавиши, SSE, опрос
+│   ├── core/       @toimetdev/pathlogs-core    — диалоги, меню, тултипы, палитра, Markdown
+│   └── cli/        @toimetdev/pathlogs-ui      — установка виджетов в проект
 ├── registry/
 │   └── widgets/    kanban, gantt, filter-bar
 └── tests/          165 тестов на чистую логику
@@ -26,24 +26,24 @@ pathlogs-dev-framework/
 ## Установка
 
 ```bash
-npm install @pathlogs/core @pathlogs/hooks @pathlogs/tokens
+npm install @toimetdev/pathlogs-core @toimetdev/pathlogs-hooks @toimetdev/pathlogs-tokens
 ```
 
 Подключить стили (обычно в `globals.css`):
 
 ```css
 @import "tailwindcss";
-@import "@pathlogs/tokens/styles/index.css";
-@import "@pathlogs/core/styles/components.css";
-@import "@pathlogs/tokens/styles/tailwind.css";
+@import "@toimetdev/pathlogs-tokens/styles/index.css";
+@import "@toimetdev/pathlogs-core/styles/components.css";
+@import "@toimetdev/pathlogs-tokens/styles/tailwind.css";
 ```
 
-Последняя строка нужна, только если проект на Tailwind: она превращает токены в утилиты (`bg-surface`, `text-muted`, `border-edge`). Компоненты `@pathlogs/core` несут собственный CSS и работают без Tailwind вовсе.
+Последняя строка нужна, только если проект на Tailwind: она превращает токены в утилиты (`bg-surface`, `text-muted`, `border-edge`). Компоненты `@toimetdev/pathlogs-core` несут собственный CSS и работают без Tailwind вовсе.
 
 Снять мигание темой при загрузке — инлайн-скрипт в `<head>`:
 
 ```tsx
-import { themeScript } from "@pathlogs/tokens";
+import { themeScript } from "@toimetdev/pathlogs-tokens";
 
 <head>
   <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
@@ -55,9 +55,9 @@ import { themeScript } from "@pathlogs/tokens";
 ## Виджеты
 
 ```bash
-npx pathlogs-ui init          # pathlogs.json + импорты стилей
-npx pathlogs-ui list          # что есть в реестре
-npx pathlogs-ui add kanban    # скопировать в src/components/ui/
+npx @toimetdev/pathlogs-ui init          # pathlogs.json + импорты стилей
+npx @toimetdev/pathlogs-ui list          # что есть в реестре
+npx @toimetdev/pathlogs-ui add kanban    # скопировать в src/components/ui/
 ```
 
 `init` создаёт `pathlogs.json`:
@@ -75,14 +75,14 @@ npx pathlogs-ui add kanban    # скопировать в src/components/ui/
 
 ---
 
-## @pathlogs/tokens
+## @toimetdev/pathlogs-tokens
 
 Плоский набор CSS-переменных: поверхности, текст, акценты, семантика состояний, радиусы, тени, шкала z-index, тайминги. Тёмная тема — значение по умолчанию, светлая включается атрибутом `[data-theme="light"]` на `<html>`.
 
 Общая шкала слоёв важнее, чем кажется: без неё портал одного компонента перекрывает портал другого в случайном порядке.
 
 ```ts
-import { alpha, readableTextOn, backdropCss, BOARD_PALETTE } from "@pathlogs/tokens";
+import { alpha, readableTextOn, backdropCss, BOARD_PALETTE } from "@toimetdev/pathlogs-tokens";
 
 alpha("#6366f1", 0.3);        // "#6366f14d"
 readableTextOn("#ffff00");    // "#000000" — белый текст на жёлтом не читается
@@ -93,7 +93,7 @@ backdropCss({ color: "#6366f1", colorTo: "#ec4899", angle: 45 });
 
 Файлы стилей: `styles/tokens.css`, `base.css`, `animations.css`, `scroll.css`, `index.css` (всё вместе), `tailwind.css` (мост к Tailwind v4).
 
-## @pathlogs/hooks
+## @toimetdev/pathlogs-hooks
 
 ### useDragScroll
 
@@ -157,7 +157,7 @@ const { resolved, toggle } = useTheme();
 const { active, scrollTo } = useActiveSection(["overview", "comments"], { offset: () => nav.offsetHeight });
 ```
 
-## @pathlogs/core
+## @toimetdev/pathlogs-core
 
 | Компонент | Назначение |
 |---|---|
@@ -289,7 +289,7 @@ npm run check      # всё разом
   "type": "widget",
   "dependencies": [],
   "registryDependencies": [],
-  "packageDependencies": ["@pathlogs/core"],
+  "packageDependencies": ["@toimetdev/pathlogs-core"],
   "tailwind": true,
   "files": [{ "path": "Widget.tsx", "target": "имя/Widget.tsx" }]
 }

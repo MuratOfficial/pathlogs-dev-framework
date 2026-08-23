@@ -1,14 +1,14 @@
 /**
- * Стили компонентов @pathlogs/core.
+ * Стили компонентов @toimetdev/pathlogs-core.
  *
  * Собственные классы (pl-*), а не Tailwind: пакет ставится из npm и должен
  * работать в проекте с любым CSS-фреймворком или вовсе без него. Всё, что
- * касается цвета и размера, взято из токенов @pathlogs/tokens — поэтому
+ * касается цвета и размера, взято из токенов @toimetdev/pathlogs-tokens — поэтому
  * перекрасить компоненты можно, не трогая эти правила.
  *
  * Порядок подключения:
- *   @import "@pathlogs/tokens/styles/index.css";
- *   @import "@pathlogs/core/styles/components.css";
+ *   @import "@toimetdev/pathlogs-tokens/styles/index.css";
+ *   @import "@toimetdev/pathlogs-core/styles/components.css";
  */
 
 /* ───────────────────────── Кнопка ───────────────────────── */

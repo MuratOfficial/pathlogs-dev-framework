@@ -9,7 +9,7 @@ import {
   hiddenEdges,
   isDragIntent,
   keyboardScroll,
-} from "@pathlogs/hooks";
+} from "@toimetdev/pathlogs-hooks";
 
 describe("isDragIntent", () => {
   it("не считает мелкий сдвиг протяжкой", () => {

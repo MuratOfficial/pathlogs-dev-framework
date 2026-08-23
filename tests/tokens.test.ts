@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   activeSectionId,
   type SectionPosition,
-} from "@pathlogs/hooks";
+} from "@toimetdev/pathlogs-hooks";
 import {
   alpha,
   backdropCss,
@@ -11,8 +11,8 @@ import {
   luminance,
   readableTextOn,
   themeScript,
-} from "@pathlogs/tokens";
-import { cn, initials } from "@pathlogs/core";
+} from "@toimetdev/pathlogs-tokens";
+import { cn, initials } from "@toimetdev/pathlogs-core";
 
 describe("isHexColor / hexToRgb", () => {
   it("принимает #rrggbb в любом регистре", () => {

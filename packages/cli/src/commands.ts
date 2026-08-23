@@ -27,10 +27,10 @@ export const yellow = paint("33");
 export const cyan = paint("36");
 
 const STYLE_IMPORTS = [
-  '@import "@pathlogs/tokens/styles/index.css";',
-  '@import "@pathlogs/core/styles/components.css";',
+  '@import "@toimetdev/pathlogs-tokens/styles/index.css";',
+  '@import "@toimetdev/pathlogs-core/styles/components.css";',
 ];
-const TAILWIND_BRIDGE = '@import "@pathlogs/tokens/styles/tailwind.css";';
+const TAILWIND_BRIDGE = '@import "@toimetdev/pathlogs-tokens/styles/tailwind.css";';
 
 export interface CommandOptions {
   cwd: string;
@@ -108,7 +108,7 @@ export async function init(options: CommandOptions & { config?: Partial<Config> 
     }
   }
 
-  console.log(`\n  ${dim("Дальше:")} npx pathlogs-ui add kanban\n`);
+  console.log(`\n  ${dim("Дальше:")} npx @toimetdev/pathlogs-ui add kanban\n`);
 }
 
 export async function list(): Promise<void> {
@@ -119,14 +119,14 @@ export async function list(): Promise<void> {
     if (item.description) console.log(`  ${" ".repeat(12)} ${dim(item.description)}`);
     console.log();
   }
-  console.log(`  ${dim("Установка:")} npx pathlogs-ui add <имя>\n`);
+  console.log(`  ${dim("Установка:")} npx @toimetdev/pathlogs-ui add <имя>\n`);
 }
 
 /** Импорты между файлами виджета: относительные заменяются на алиас проекта. */
 function rewriteImports(source: string, item: RegistryItem, config: Config): string {
   if (!config.alias) return source;
   // Только импорты внутри самого виджета: «./kanbanOrder» → «@/…/kanban/kanbanOrder».
-  // Пакеты фреймворка (@pathlogs/*) не трогаем — они ставятся из npm.
+  // Пакеты фреймворка (@toimetdev/pathlogs-*) не трогаем — они ставятся из npm.
   return source.replace(
     /from\s+"\.\/([A-Za-z0-9_-]+)"/g,
     (_match, file: string) => `from "${config.alias}/${item.name}/${file}"`

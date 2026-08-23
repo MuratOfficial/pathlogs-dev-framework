@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@pathlogs/hooks";
+import { useTheme } from "@toimetdev/pathlogs-hooks";
 import { cn } from "./cn.js";
 
 export interface ThemeToggleProps {
@@ -19,7 +19,7 @@ export interface ThemeToggleProps {
  * Переключатель светлой и тёмной темы.
  *
  * Тема лежит в localStorage и в атрибуте [data-theme] на <html>; начальное
- * значение ставит инлайн-скрипт themeScript() из @pathlogs/tokens — без него
+ * значение ставит инлайн-скрипт themeScript() из @toimetdev/pathlogs-tokens — без него
  * страница мигнёт чужой темой до гидратации.
  */
 export function ThemeToggle({ storageKey, labels, className }: ThemeToggleProps = {}) {

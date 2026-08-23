@@ -54,7 +54,7 @@ export async function requireConfig(cwd: string): Promise<Config> {
   const config = await readConfig(cwd);
   if (!config) {
     throw new Error(
-      `Не найден ${CONFIG_FILE}. Выполните «npx pathlogs-ui init» в корне проекта.`
+      `Не найден ${CONFIG_FILE}. Выполните «npx @toimetdev/pathlogs-ui init» в корне проекта.`
     );
   }
   return config;

@@ -5,7 +5,7 @@
   "type": "widget",
   "dependencies": [],
   "registryDependencies": [],
-  "packageDependencies": ["@pathlogs/hooks"],
+  "packageDependencies": ["@toimetdev/pathlogs-hooks"],
   "tailwind": true,
   "files": [
     { "path": "Gantt.tsx", "target": "gantt/Gantt.tsx" },

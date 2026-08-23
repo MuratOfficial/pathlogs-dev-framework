@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseBlocks, parseInline, parseInlineWithMentions } from "@pathlogs/core";
+import { parseBlocks, parseInline, parseInlineWithMentions } from "@toimetdev/pathlogs-core";
 
 describe("parseBlocks", () => {
   it("собирает соседние строки в один абзац", () => {

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { alpha, readableTextOn } from "@pathlogs/tokens";
+import { alpha, readableTextOn } from "@toimetdev/pathlogs-tokens";
 import { cn } from "./cn.js";
 
 export interface BadgeProps {

@@ -1,8 +1,8 @@
 "use client";
 
 import { Fragment, useRef, useState, useTransition, type ReactNode } from "react";
-import { useDragScroll } from "@pathlogs/hooks";
-import { ConfirmDialog, DragScroll } from "@pathlogs/core";
+import { useDragScroll } from "@toimetdev/pathlogs-hooks";
+import { ConfirmDialog, DragScroll } from "@toimetdev/pathlogs-core";
 import {
   applyOrder,
   columnItems,

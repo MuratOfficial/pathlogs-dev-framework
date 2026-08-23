@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useHotkeys, type Hotkey } from "@pathlogs/hooks";
+import { useHotkeys, type Hotkey } from "@toimetdev/pathlogs-hooks";
 import { Dialog } from "./Dialog.js";
 
 export interface HotkeysHelpProps {

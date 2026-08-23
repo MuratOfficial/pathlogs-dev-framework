@@ -7,9 +7,9 @@
     "declarationMap": false,
     "sourceMap": false,
     "paths": {
-      "@pathlogs/core": ["../packages/core/src/index.ts"],
-      "@pathlogs/hooks": ["../packages/hooks/src/index.ts"],
-      "@pathlogs/tokens": ["../packages/tokens/src/index.ts"]
+      "@toimetdev/pathlogs-core": ["../packages/core/src/index.ts"],
+      "@toimetdev/pathlogs-hooks": ["../packages/hooks/src/index.ts"],
+      "@toimetdev/pathlogs-tokens": ["../packages/tokens/src/index.ts"]
     }
   },
   "include": ["widgets/**/*"]

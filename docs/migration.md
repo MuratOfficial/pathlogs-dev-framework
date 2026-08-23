@@ -10,14 +10,14 @@
 
 | В pathlogs | Во фреймворке | Что изменится в коде |
 |---|---|---|
-| `components/ConfirmDialog.tsx` | `ConfirmDialog` из `@pathlogs/core` | Подписи кнопок задаются пропами, дефолты английские |
+| `components/ConfirmDialog.tsx` | `ConfirmDialog` из `@toimetdev/pathlogs-core` | Подписи кнопок задаются пропами, дефолты английские |
 | `components/TooltipLayer.tsx` | `TooltipLayer` | Атрибут `data-tip` тот же |
 | `components/MoreMenu.tsx` | `Menu` + `MenuItem` | Закрытие при открытом диалоге теперь через `useDismiss` и `[data-pl-overlay]`, а не через поиск `.fixed.inset-0` |
 | `components/ThemeToggle.tsx` | `ThemeToggle` | — |
 | `components/AppShell.tsx` | `AppShell` | Логотип уходит в проп `brand` |
 | `components/Markdown.tsx` | `Markdown`, `MarkdownInline` | Разбор вынесен в `markdownParser`, доступен отдельно |
 | `components/DragScroll.tsx`, `useDragScroll.ts` | `DragScroll`, `useDragScroll` | — |
-| `lib/dragScroll.ts`, `lib/dragScrollBinding.ts` | `@pathlogs/hooks` | data-атрибуты получили префикс `pl-` |
+| `lib/dragScroll.ts`, `lib/dragScrollBinding.ts` | `@toimetdev/pathlogs-hooks` | data-атрибуты получили префикс `pl-` |
 | `lib/sections.ts` + `TaskSectionNav` | `useActiveSection` + `SectionNav` | Разделы описываются массивом `{ id, label, count }` |
 | `components/task/EditableText.tsx` | `EditableText` | Вместо `field` — прямой `onSave(next)` |
 | `components/task/MentionTextarea.tsx` | `MentionTextarea` | `members` → `people` |
@@ -47,9 +47,9 @@
 
 ```css
 @import "tailwindcss";
-@import "@pathlogs/tokens/styles/index.css";
-@import "@pathlogs/core/styles/components.css";
-@import "@pathlogs/tokens/styles/tailwind.css";
+@import "@toimetdev/pathlogs-tokens/styles/index.css";
+@import "@toimetdev/pathlogs-core/styles/components.css";
+@import "@toimetdev/pathlogs-tokens/styles/tailwind.css";
 ```
 
 Всё, что было в `globals.css` — переменные, анимации, `.page-hint`, `.no-scrollbar`, маски краёв — уже есть в пакете. Утилиты Tailwind (`bg-surface`, `text-muted`, `border-edge`) сохраняют прежние имена, поэтому вёрстку править не нужно.
@@ -66,7 +66,7 @@
 
 Своё в приложении остаётся: `.auth-input` и `.app-sidebar` — их правила специфичны для экранов входа pathlogs.
 
-Инлайн-скрипт темы в `layout.tsx` заменить на `themeScript()` из `@pathlogs/tokens`.
+Инлайн-скрипт темы в `layout.tsx` заменить на `themeScript()` из `@toimetdev/pathlogs-tokens`.
 
 **Проверка:** приложение выглядит как раньше в обеих темах, переключатель работает без мигания при перезагрузке.
 
@@ -74,7 +74,7 @@
 
 Удалить `src/lib/dragScroll.ts`, `src/lib/dragScrollBinding.ts`, `src/components/useDragScroll.ts`, `src/lib/sections.ts` и соответствующие тесты — они переехали вместе с кодом.
 
-Импорты `@/components/useDragScroll` → `@pathlogs/hooks`.
+Импорты `@/components/useDragScroll` → `@toimetdev/pathlogs-hooks`.
 
 `Hotkeys.tsx` превращается в вызов:
 
@@ -152,7 +152,7 @@ const { status, updatedAt } = useEventStream(`/api/projects/${projectId}/stream`
 ## Шаг 4. Фильтры
 
 ```bash
-npx pathlogs-ui add filter-bar
+npx @toimetdev/pathlogs-ui add filter-bar
 ```
 
 `lib/taskFilter.ts` заменяется описанием полей — например, в `lib/filterFields.ts`:
@@ -181,7 +181,7 @@ export const taskFilterFields: FilterField<TaskDTO>[] = [
 ## Шаг 5. Доска
 
 ```bash
-npx pathlogs-ui add kanban
+npx @toimetdev/pathlogs-ui add kanban
 ```
 
 Тело карточки — то, что сейчас внутри `KanbanBoard`, — переезжает в отдельный `TaskCard.tsx` приложения: номер, галочка «готово», бейджи, палитра цвета, аватары, метки. Это домен трекера, и он остаётся в приложении.
@@ -220,7 +220,7 @@ Server actions менять не нужно: их сигнатуры уже со
 ## Шаг 6. Гант
 
 ```bash
-npx pathlogs-ui add gantt
+npx @toimetdev/pathlogs-ui add gantt
 ```
 
 ```tsx

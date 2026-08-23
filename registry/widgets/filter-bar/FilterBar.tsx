@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ConfirmDialog } from "@pathlogs/core";
+import { ConfirmDialog } from "@toimetdev/pathlogs-core";
 import {
   ANY,
   activeFieldCount,

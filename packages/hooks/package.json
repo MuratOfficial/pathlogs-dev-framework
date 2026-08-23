@@ -1,11 +1,13 @@
 {
-  "name": "@pathlogs/hooks",
+  "name": "@toimetdev/pathlogs-hooks",
   "version": "0.1.0",
   "description": "Behavioral React hooks for the PathLogs UI framework: drag-scroll, hotkeys, SSE, theming.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -16,14 +18,35 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "tsc -b .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepack": "tsc -b ."
   },
   "dependencies": {
-    "@pathlogs/tokens": "0.1.0"
+    "@toimetdev/pathlogs-tokens": "0.1.0"
   },
   "peerDependencies": {
     "react": ">=18"
   },
-  "keywords": ["react", "hooks", "drag-scroll", "hotkeys", "sse", "theme"]
+  "keywords": [
+    "react",
+    "hooks",
+    "drag-scroll",
+    "hotkeys",
+    "sse",
+    "theme"
+  ],
+  "author": "Murat Toimet <toimetm@gmail.com>",
+  "homepage": "https://github.com/MuratOfficial/pathlogs-dev-framework#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuratOfficial/pathlogs-dev-framework.git",
+    "directory": "packages/hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/MuratOfficial/pathlogs-dev-framework/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

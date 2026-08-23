@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useDragScroll, type DragScrollOptions } from "@pathlogs/hooks";
+import { useDragScroll, type DragScrollOptions } from "@toimetdev/pathlogs-hooks";
 import { cn } from "./cn.js";
 
 export interface DragScrollProps extends DragScrollOptions {

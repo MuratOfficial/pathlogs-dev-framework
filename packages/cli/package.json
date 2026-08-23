@@ -1,5 +1,5 @@
 {
-  "name": "pathlogs-ui",
+  "name": "@toimetdev/pathlogs-ui",
   "version": "0.1.0",
   "description": "CLI that copies PathLogs widgets (kanban, gantt, filter bar) into your project, shadcn-style.",
   "license": "MIT",
@@ -7,14 +7,37 @@
   "bin": {
     "pathlogs-ui": "./dist/index.js"
   },
-  "files": ["dist", "registry"],
+  "files": [
+    "dist",
+    "registry"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prepack": "node scripts/bundle-registry.mjs"
+    "prepack": "tsc -b . && node scripts/bundle-registry.mjs"
   },
   "engines": {
     "node": ">=20"
   },
-  "keywords": ["cli", "ui", "registry", "kanban", "gantt", "react"]
+  "keywords": [
+    "cli",
+    "ui",
+    "registry",
+    "kanban",
+    "gantt",
+    "react"
+  ],
+  "author": "Murat Toimet <toimetm@gmail.com>",
+  "homepage": "https://github.com/MuratOfficial/pathlogs-dev-framework#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuratOfficial/pathlogs-dev-framework.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/MuratOfficial/pathlogs-dev-framework/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

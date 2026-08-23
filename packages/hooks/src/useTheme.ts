@@ -10,7 +10,7 @@ import {
   toggleTheme,
   type ResolvedTheme,
   type ThemePreference,
-} from "@pathlogs/tokens";
+} from "@toimetdev/pathlogs-tokens";
 
 /**
  * Текущая тема как внешнее состояние DOM.
