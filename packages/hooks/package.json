@@ -1,6 +1,6 @@
 {
   "name": "@toimetdev/pathlogs-hooks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Behavioral React hooks for the PathLogs UI framework: drag-scroll, hotkeys, SSE, theming.",
   "license": "MIT",
   "type": "module",
@@ -23,7 +23,7 @@
     "prepack": "tsc -b ."
   },
   "dependencies": {
-    "@toimetdev/pathlogs-tokens": "0.1.0"
+    "@toimetdev/pathlogs-tokens": "0.2.0"
   },
   "peerDependencies": {
     "react": ">=18"

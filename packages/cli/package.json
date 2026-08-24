@@ -1,6 +1,6 @@
 {
   "name": "@toimetdev/pathlogs-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI that copies PathLogs widgets (kanban, gantt, filter bar) into your project, shadcn-style.",
   "license": "MIT",
   "type": "module",
@@ -14,7 +14,8 @@
   "scripts": {
     "build": "tsc -b .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prepack": "tsc -b . && node scripts/bundle-registry.mjs"
+    "prepack": "tsc -b . && node scripts/bundle-registry.mjs",
+    "postpack": "node scripts/clean-registry.mjs"
   },
   "engines": {
     "node": ">=20"

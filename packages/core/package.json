@@ -1,6 +1,6 @@
 {
   "name": "@toimetdev/pathlogs-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Headless-friendly React components for the PathLogs UI framework: dialogs, menus, tooltips, command palette, markdown.",
   "license": "MIT",
   "type": "module",
@@ -27,8 +27,8 @@
     "prepack": "tsc -b ."
   },
   "dependencies": {
-    "@toimetdev/pathlogs-hooks": "0.1.0",
-    "@toimetdev/pathlogs-tokens": "0.1.0"
+    "@toimetdev/pathlogs-hooks": "0.2.0",
+    "@toimetdev/pathlogs-tokens": "0.2.0"
   },
   "peerDependencies": {
     "react": ">=18",

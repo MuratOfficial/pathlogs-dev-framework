@@ -14,11 +14,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "cli": "node packages/cli/dist/index.js",
-    "check": "npm run typecheck && npm run test",
-    "release:dry": "npm publish --dry-run -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
+    "check": "node scripts/sync-versions.mjs --check && npm run typecheck && npm run test",
+    "release:dry": "node scripts/sync-versions.mjs --check && npm publish --dry-run -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
     "release": "npm run check && npm publish -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
     "docs": "npm run dev -w @toimetdev/pathlogs-docs",
-    "docs:build": "npm run build -w @toimetdev/pathlogs-docs"
+    "docs:build": "npm run build -w @toimetdev/pathlogs-docs",
+    "sync-versions": "node scripts/sync-versions.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

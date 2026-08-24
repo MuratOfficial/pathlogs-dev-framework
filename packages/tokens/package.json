@@ -1,6 +1,6 @@
 {
   "name": "@toimetdev/pathlogs-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design tokens, theming and color utilities for the PathLogs UI framework.",
   "license": "MIT",
   "type": "module",
