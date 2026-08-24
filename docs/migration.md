@@ -251,7 +251,15 @@ npx @toimetdev/pathlogs-ui add gantt
 Удалить из `package.json` приложения то, что больше не нужно, и прогнать:
 
 ```bash
-npm run lint && npm test && npm run build
+npm run lint
+```
+
+```bash
+npm test
+```
+
+```bash
+npm run build
 ```
 
 Тесты `dragScroll.test.ts`, `dragScrollBinding.test.ts`, `sections.test.ts`, `taskFilter.test.ts` из pathlogs удаляются — их предмет переехал во фреймворк вместе с тестами.

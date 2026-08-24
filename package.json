@@ -19,7 +19,8 @@
     "release": "npm run check && npm publish -w @toimetdev/pathlogs-tokens -w @toimetdev/pathlogs-hooks -w @toimetdev/pathlogs-core -w @toimetdev/pathlogs-ui",
     "docs": "npm run dev -w @toimetdev/pathlogs-docs",
     "docs:build": "npm run build -w @toimetdev/pathlogs-docs",
-    "sync-versions": "node scripts/sync-versions.mjs"
+    "sync-versions": "node scripts/sync-versions.mjs",
+    "bump": "node scripts/bump.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
