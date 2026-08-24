@@ -1,0 +1,15 @@
+{
+  "name": "log-stream",
+  "title": "Log stream",
+  "description": "Виртуализированный вывод логов: ANSI-цвета, фильтр по уровню и подстроке, подсветка совпадений и прилипание к концу. Держит десятки тысяч строк.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": ["@toimetdev/pathlogs-hooks"],
+  "tailwind": true,
+  "files": [
+    { "path": "LogStream.tsx", "target": "log-stream/LogStream.tsx" },
+    { "path": "ansi.ts", "target": "log-stream/ansi.ts" },
+    { "path": "logBuffer.ts", "target": "log-stream/logBuffer.ts" }
+  ]
+}

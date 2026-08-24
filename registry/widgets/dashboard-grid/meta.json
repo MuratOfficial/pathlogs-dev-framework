@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-grid",
+  "title": "Dashboard grid",
+  "description": "Плиточная сетка с перетаскиванием и ресайзом. Плитки расталкивают соседей и оседают вверх; упаковка и разрешение коллизий отделены и покрыты тестами.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "DashboardGrid.tsx", "target": "dashboard-grid/DashboardGrid.tsx" },
+    { "path": "gridLayout.ts", "target": "dashboard-grid/gridLayout.ts" }
+  ]
+}

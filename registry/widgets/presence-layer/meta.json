@@ -1,0 +1,14 @@
+{
+  "name": "presence-layer",
+  "title": "Presence layer",
+  "description": "Курсоры соучастников поверх поверхности через поток событий. Сглаживание рывков сети, устаревание по TTL и устойчивый цвет по id отделены и покрыты тестами.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "PresenceLayer.tsx", "target": "presence-layer/PresenceLayer.tsx" },
+    { "path": "presence.ts", "target": "presence-layer/presence.ts" }
+  ]
+}

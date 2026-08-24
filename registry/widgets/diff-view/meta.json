@@ -1,0 +1,14 @@
+{
+  "name": "diff-view",
+  "title": "Diff view",
+  "description": "Дифф двух текстов: построчно и в две колонки, с внутристрочной подсветкой по словам и сборкой в куски с контекстом. LCS считается на месте.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "DiffView.tsx", "target": "diff-view/DiffView.tsx" },
+    { "path": "diffModel.ts", "target": "diff-view/diffModel.ts" }
+  ]
+}

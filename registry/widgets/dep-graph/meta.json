@@ -1,0 +1,14 @@
+{
+  "name": "dep-graph",
+  "title": "Dependency graph",
+  "description": "Слоистая раскладка ориентированного графа: разрыв циклов, разбивка по слоям и снижение пересечений. Обратные связи рисуются пунктиром, а не роняют картинку.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "DependencyGraph.tsx", "target": "dep-graph/DependencyGraph.tsx" },
+    { "path": "dagLayout.ts", "target": "dep-graph/dagLayout.ts" }
+  ]
+}

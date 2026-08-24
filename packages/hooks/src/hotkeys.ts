@@ -98,6 +98,58 @@ export function chordFromEvent(event: {
   };
 }
 
+/** Клавиши-модификаторы: сами по себе аккордом не являются. */
+const MODIFIER_KEYS = new Set(["control", "shift", "alt", "meta", "os", "altgraph"]);
+
+/** Нажат ли сейчас только модификатор, без основной клавиши. */
+export function isModifierOnly(event: { key: string }): boolean {
+  return MODIFIER_KEYS.has(event.key.toLowerCase());
+}
+
+/** Человекочитаемые имена клавиш для показа: enter → ↵, escape → Esc. */
+const KEY_SYMBOLS: Record<string, string> = {
+  enter: "↵",
+  " ": "Space",
+  escape: "Esc",
+  arrowup: "↑",
+  arrowdown: "↓",
+  arrowleft: "←",
+  arrowright: "→",
+  backspace: "⌫",
+  delete: "Del",
+  tab: "⇥",
+};
+
+/**
+ * Записывает аккорд в текст той же грамматики, что читает parseHotkey.
+ *
+ * `mod` разворачивается обратно в `mod`, а не в `ctrl`: запись остаётся
+ * межплатформенной, и на macOS та же комбинация покажется как ⌘. Порядок
+ * модификаторов фиксирован, чтобы `mod+shift+k` и `shift+mod+k` не считались
+ * разными записями одного и того же.
+ */
+export function chordToSpec(chord: KeyChord): string {
+  const parts: string[] = [];
+  if (chord.mod) parts.push("mod");
+  if (chord.alt) parts.push("alt");
+  if (chord.shift) parts.push("shift");
+  parts.push(chord.key);
+  return parts.join("+");
+}
+
+/** Формирует аккорд к показу: ⌘K, mod по платформе, символ клавиши. */
+export function formatChord(chord: KeyChord, platform: "mac" | "other" = "other"): string {
+  const parts: string[] = [];
+  if (chord.mod) parts.push(platform === "mac" ? "⌘" : "Ctrl");
+  if (chord.alt) parts.push(platform === "mac" ? "⌥" : "Alt");
+  if (chord.shift) parts.push(platform === "mac" ? "⇧" : "Shift");
+
+  const key = KEY_SYMBOLS[chord.key] ?? (chord.key.length === 1 ? chord.key.toUpperCase() : chord.key);
+  parts.push(key);
+  // На macOS модификаторы принято писать слитно, на прочих — через плюс
+  return parts.join(platform === "mac" ? "" : "+");
+}
+
 /**
  * Совпадают ли аккорды.
  *

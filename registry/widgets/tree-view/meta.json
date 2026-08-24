@@ -1,0 +1,14 @@
+{
+  "name": "tree-view",
+  "title": "Tree view",
+  "description": "Дерево с клавиатурной навигацией по ARIA, tri-state чекбоксами и переносом узлов мышью. Запрет переноса узла в собственного потомка встроен.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "TreeView.tsx", "target": "tree-view/TreeView.tsx" },
+    { "path": "treeModel.ts", "target": "tree-view/treeModel.ts" }
+  ]
+}

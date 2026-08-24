@@ -1,0 +1,14 @@
+{
+  "name": "flow-canvas",
+  "title": "Flow canvas",
+  "description": "Канва pan/zoom с узлами и связями. Зум колесом держит точку под курсором на месте, узлы липнут к сетке. Вся математика мир↔экран отделена и покрыта тестами.",
+  "type": "widget",
+  "dependencies": [],
+  "registryDependencies": [],
+  "packageDependencies": [],
+  "tailwind": true,
+  "files": [
+    { "path": "FlowCanvas.tsx", "target": "flow-canvas/FlowCanvas.tsx" },
+    { "path": "viewport.ts", "target": "flow-canvas/viewport.ts" }
+  ]
+}

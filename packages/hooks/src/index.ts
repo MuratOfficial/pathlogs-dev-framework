@@ -2,6 +2,7 @@
 export * from "./dragScroll.js";
 export * from "./hotkeys.js";
 export * from "./sections.js";
+export * from "./virtual.js";
 
 // Привязка к DOM без React
 export * from "./dragScrollBinding.js";
@@ -14,3 +15,4 @@ export * from "./useEventStream.js";
 export * from "./usePolling.js";
 export * from "./useDismiss.js";
 export * from "./useActiveSection.js";
+export * from "./useVirtual.js";
