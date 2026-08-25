@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useDict } from "./LangProvider";
 
 export interface CopyButtonProps {
   value: string;
   className?: string;
+  /** Своя подпись. По умолчанию — «скопировать» на языке страницы. */
   label?: string;
 }
 
@@ -14,8 +16,10 @@ export interface CopyButtonProps {
  * Подтверждение обязательно: копирование ничего не меняет на экране,
  * и без ответа непонятно, сработал клик или нет.
  */
-export function CopyButton({ value, className = "", label = "Скопировать" }: CopyButtonProps) {
+export function CopyButton({ value, className = "", label }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
+  const t = useDict();
+  const idle = label ?? t.copy;
 
   // Сброс по таймеру, а не по следующему клику: иначе галочка висела бы
   // до конца сессии
@@ -39,8 +43,8 @@ export function CopyButton({ value, className = "", label = "Скопирова�
     <button
       type="button"
       onClick={copy}
-      aria-label={copied ? "Скопировано" : label}
-      data-tip={copied ? "Скопировано" : label}
+      aria-label={copied ? t.copied : idle}
+      data-tip={copied ? t.copied : idle}
       className={`flex h-7 w-7 items-center justify-center rounded-lg border border-edge bg-surface text-muted transition hover:border-accent/50 hover:text-foreground ${className}`}
     >
       {copied ? (

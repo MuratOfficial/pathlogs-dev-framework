@@ -1,6 +1,7 @@
 "use client";
 
 import { useActiveSection } from "@toimetdev/pathlogs-hooks";
+import { dict, type Lang } from "@/content/locale";
 
 export interface TocEntry {
   id: string;
@@ -14,7 +15,7 @@ export interface TocEntry {
  * хук, что описан в разделе про хуки. Отступ берём равным высоте липкой
  * шапки: без него раздел подсвечивался бы, ещё не показавшись из-под неё.
  */
-export function Toc({ entries }: { entries: TocEntry[] }) {
+export function Toc({ entries, lang }: { entries: TocEntry[]; lang: Lang }) {
   const { active, scrollTo } = useActiveSection(
     entries.map((e) => e.id),
     { offset: 80 }
@@ -26,7 +27,7 @@ export function Toc({ entries }: { entries: TocEntry[] }) {
     <aside className="docs-toc">
       <div className="sticky top-20">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-muted">
-          На этой странице
+          {dict(lang).onThisPage}
         </p>
         <ul className="flex flex-col gap-1 border-l border-edge text-sm">
           {entries.map((entry) => {

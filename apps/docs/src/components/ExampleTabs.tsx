@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { useDict } from "./LangProvider";
 
 export interface ExampleTabsProps {
   preview: ReactNode;
@@ -25,6 +26,7 @@ export function ExampleTabs({
   plain = false,
 }: ExampleTabsProps) {
   const [tab, setTab] = useState(defaultTab);
+  const t = useDict();
 
   return (
     <div className="not-prose overflow-hidden rounded-xl border border-edge bg-surface">
@@ -41,7 +43,7 @@ export function ExampleTabs({
                 : "text-muted hover:text-foreground"
             }`}
           >
-            {value === "preview" ? "Превью" : "Код"}
+            {value === "preview" ? t.tabPreview : t.tabCode}
           </button>
         ))}
       </div>
