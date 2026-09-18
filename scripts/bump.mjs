@@ -99,11 +99,44 @@ for (const file of files) {
 }
 
 console.log("\n▸ установка");
-// На Windows исполняемый файл называется npm.cmd. Зовём его по имени,
-// а не через shell: true — иначе Node справедливо предупреждает, что
-// аргументы уходят в командную строку без экранирования.
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-const install = spawnSync(npm, ["install"], { cwd: root, stdio: "inherit" });
+
+/**
+ * Запуск установки.
+ *
+ * Прямой spawnSync("npm.cmd", …) на Windows больше не работает: начиная с
+ * 20.12 Node отказывается запускать .cmd и .bat без shell (CVE-2024-27980)
+ * и возвращает EINVAL, даже не создав процесса. А shell: true возвращает
+ * ровно ту дыру с экранированием аргументов, ради которой запрет и вводили.
+ *
+ * Поэтому, когда npm сам сообщил путь к своему CLI (npm_execpath — npm
+ * выставляет его всем скриптам из package.json), зовём этот .js текущим
+ * Node: обычный исполняемый файл, без shell и без .cmd-обёртки. Ветка с
+ * shell: true нужна только для запуска скрипта руками, мимо npm.
+ */
+function runInstall() {
+  const cli = process.env.npm_execpath;
+
+  if (cli && /\.[cm]?js$/i.test(cli) && existsSync(cli)) {
+    return spawnSync(process.execPath, [cli, "install"], {
+      cwd: root,
+      stdio: "inherit",
+    });
+  }
+
+  // Команда одной строкой, а не массивом аргументов: с массивом Node
+  // предупреждает (DEP0190), что при shell: true аргументы не экранируются.
+  // Здесь их и нет — строка целиком захардкожена
+  return spawnSync("npm install", { cwd: root, stdio: "inherit", shell: true });
+}
+
+const install = runInstall();
+
+// Процесса могло и не быть вовсе. При stdio: "inherit" на экране тогда
+// пусто, и без этой строки причина остаётся невидимой
+if (install.error) {
+  console.error(`\nНе удалось запустить установку: ${install.error.message}`);
+  process.exit(1);
+}
 
 if (install.status !== 0) {
   console.error("\nУстановка не прошла. Остановились.");
