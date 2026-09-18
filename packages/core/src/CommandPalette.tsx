@@ -95,13 +95,23 @@ export function CommandPalette({
       : []
   );
 
+  // Функцию поиска держим в ref: инлайновый проп меняет ссылку на каждом
+  // рендере, и эффект ниже перезапускал бы таймер вхолостую, откладывая
+  // запрос до тех пор, пока родитель не перестанет рендериться.
+  const searchRef = useRef(search);
+  useEffect(() => {
+    searchRef.current = search;
+  });
+  const hasSearch = Boolean(search);
+
   // Запрос к серверу с задержкой: пока пользователь печатает, промежуточные
   // подстроки никому не нужны
   useEffect(() => {
-    if (!open || !search) return;
+    const run = searchRef.current;
+    if (!open || !run) return;
     let cancelled = false;
     const timer = setTimeout(() => {
-      search(query)
+      run(query)
         .then((results) => {
           if (cancelled) return;
           setRemote(results);
@@ -116,7 +126,7 @@ export function CommandPalette({
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [query, open, search, debounce]);
+  }, [query, open, hasSearch, debounce]);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();

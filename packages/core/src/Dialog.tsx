@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Portal } from "./Portal.js";
 import { cn } from "./cn.js";
 
@@ -63,35 +63,55 @@ export function Dialog({
   align = "center",
   className,
 }: DialogProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
+  // Панель держим в состоянии, а не в ref: Portal монтируется кадром позже
+  // (до этого он не рендерит ничего), и эффект, запущенный сразу, не нашёл бы
+  // ни панели, ни полей. Callback-ref будит эффект ровно тогда, когда узел
+  // появился в документе.
+  const [panel, setPanel] = useState<HTMLDivElement | null>(null);
   // Кто был в фокусе до открытия: туда фокус и вернём при закрытии, иначе
   // после Escape клавиатура окажется в начале страницы.
   const restoreRef = useRef<HTMLElement | null>(null);
 
+  // Колбэк и флаги живут в ref, а эффект ниже зависит только от открытия.
+  // Иначе инлайновый onClose у вызывающего кода (а он почти всегда инлайновый)
+  // давал бы новую функцию на каждый рендер: эффект перезапускался бы после
+  // каждого символа в поле и уводил фокус на первый элемент формы.
+  // Та же схема, что в useDismiss.
+  const onCloseRef = useRef(onClose);
+  const dismissOnEscapeRef = useRef(dismissOnEscape);
+  const busyRef = useRef(busy);
   useEffect(() => {
-    if (!open) return;
+    onCloseRef.current = onClose;
+    dismissOnEscapeRef.current = dismissOnEscape;
+    busyRef.current = busy;
+  });
+
+  useEffect(() => {
+    if (!open || !panel) return;
     restoreRef.current = document.activeElement as HTMLElement | null;
 
-    const panel = panelRef.current;
     // Фокус на первом интерактивном элементе, а если его нет — на самой
     // панели: без этого клавиатура остаётся на странице под затемнением.
-    const focusable = panel?.querySelector<HTMLElement>(
+    // Локальная копия: обработчик ниже — объявление функции, и сузить тип
+    // прямо в нём TypeScript уже не может.
+    const node = panel;
+    const focusable = node.querySelector<HTMLElement>(
       'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
-    (focusable ?? panel)?.focus();
+    (focusable ?? node).focus();
 
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && dismissOnEscape && !busy) {
+      if (e.key === "Escape" && dismissOnEscapeRef.current && !busyRef.current) {
         e.stopPropagation();
-        onClose();
+        onCloseRef.current();
         return;
       }
-      if (e.key !== "Tab" || !panel) return;
+      if (e.key !== "Tab") return;
 
       // Ловушка фокуса: Tab с последнего элемента уводит на первый, а не
       // в адресную строку и на страницу под окном.
       const items = Array.from(
-        panel.querySelectorAll<HTMLElement>(
+        node.querySelectorAll<HTMLElement>(
           'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
         )
       ).filter((el) => el.offsetParent !== null || el === document.activeElement);
@@ -121,7 +141,7 @@ export function Dialog({
       document.body.style.overflow = previousOverflow;
       restoreRef.current?.focus?.();
     };
-  }, [open, onClose, dismissOnEscape, busy]);
+  }, [open, panel]);
 
   if (!open) return null;
 
@@ -139,7 +159,7 @@ export function Dialog({
         }}
       >
         <div
-          ref={panelRef}
+          ref={setPanel}
           role="dialog"
           aria-modal="true"
           aria-label={label ?? title}
