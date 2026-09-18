@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CommandPalette, ThemeToggle, TooltipLayer, type CommandItem } from "@toimetdev/pathlogs-core";
 import { ALL_ITEMS, NAV } from "@/content/nav";
+import { dict, docsHref, homeHref, type Lang } from "@/content/locale";
+import { LangSwitch } from "./LangSwitch";
 import { Logo } from "./Logo";
 import { Sidebar } from "./Sidebar";
 
@@ -15,20 +17,21 @@ import { Sidebar } from "./Sidebar";
  * Поиск — это `CommandPalette` из самого фреймворка, а не сторонний виджет:
  * документация должна быть первым потребителем того, что документирует.
  */
-export function SiteChrome() {
+export function SiteChrome({ lang }: { lang: Lang }) {
   const router = useRouter();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = dict(lang);
 
   // Пункты палитры — те же страницы, что в боковой навигации.
   // Раздел приходит из группы, ключевые слова — из описания страницы.
   const items: CommandItem[] = ALL_ITEMS.map((item) => {
-    const group = NAV.find((g) => g.items.includes(item))?.title;
+    const group = NAV.find((g) => g.items.includes(item))?.title[lang];
     return {
       id: item.slug,
-      title: item.title,
-      keywords: `${item.description} ${item.keywords ?? ""}`,
-      onSelect: () => router.push(`/docs/${item.slug}`),
+      title: item.title[lang],
+      keywords: `${item.description[lang]} ${item.keywords?.[lang] ?? ""}`,
+      onSelect: () => router.push(docsHref(lang, item.slug)),
       ...(group ? { group } : {}),
       ...(item.badge ? { badge: item.badge } : {}),
     };
@@ -45,10 +48,10 @@ export function SiteChrome() {
         open={paletteOpen}
         onOpenChange={setPaletteOpen}
         labels={{
-          placeholder: "Поиск по документации…",
-          empty: "Ничего не найдено",
-          navigate: "навигация",
-          select: "открыть",
+          placeholder: t.searchPlaceholder,
+          empty: t.searchEmpty,
+          navigate: t.searchNavigate,
+          select: t.searchSelect,
         }}
       />
 
@@ -57,7 +60,7 @@ export function SiteChrome() {
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Меню разделов"
+            aria-label={t.sectionsMenu}
             aria-expanded={menuOpen}
             className="rounded-lg p-1.5 text-muted transition hover:bg-surface-2 hover:text-foreground lg:hidden"
           >
@@ -66,15 +69,15 @@ export function SiteChrome() {
             </svg>
           </button>
 
-          <Link href="/" aria-label="PathLogs UI — на главную" className="docs-plain">
+          <Link href={homeHref(lang)} aria-label={t.toHome} className="docs-plain">
             <Logo />
           </Link>
 
           <nav className="ml-4 hidden items-center gap-1 text-sm md:flex">
             {[
-              { href: "/docs/introduction", label: "Документация" },
-              { href: "/docs/components/dialog", label: "Компоненты" },
-              { href: "/docs/widgets/kanban", label: "Виджеты" },
+              { href: docsHref(lang, "introduction"), label: t.navDocs },
+              { href: docsHref(lang, "components/dialog"), label: t.navComponents },
+              { href: docsHref(lang, "widgets/kanban"), label: t.navWidgets },
             ].map((link) => (
               <Link
                 key={link.href}
@@ -95,17 +98,19 @@ export function SiteChrome() {
               <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
-              <span className="hidden sm:inline">Поиск</span>
+              <span className="hidden sm:inline">{t.search}</span>
               <kbd className="pl-kbd hidden sm:inline">⌘K</kbd>
             </button>
 
-            <ThemeToggle labels={{ toDark: "Тёмная тема", toLight: "Светлая тема", action: "Переключить тему" }} />
+            <LangSwitch lang={lang} />
+
+            <ThemeToggle labels={{ toDark: t.toDark, toLight: t.toLight, action: t.toggleTheme }} />
 
             <a
               href="https://github.com/MuratOfficial/pathlogs-dev-framework"
               target="_blank"
               rel="noopener noreferrer"
-              data-tip="Исходники на GitHub"
+              data-tip={t.sourcesOnGitHub}
               aria-label="GitHub"
               className="docs-plain flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-surface-2 hover:text-foreground"
             >
@@ -127,7 +132,7 @@ export function SiteChrome() {
             aria-hidden
           />
           <div className="pl-animate-fade-in fixed inset-x-0 top-14 z-30 max-h-[70vh] overflow-y-auto border-b border-edge bg-surface p-4 shadow-2xl lg:hidden">
-            <Sidebar onNavigate={() => setMenuOpen(false)} />
+            <Sidebar lang={lang} onNavigate={() => setMenuOpen(false)} />
           </div>
         </>
       )}
